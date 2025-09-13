@@ -16,8 +16,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,11 +38,10 @@ import com.example.professionals.namesInterfaceElements
 import com.example.professionals.ui.theme.RegularTextTypeONB
 import com.example.professionals.ui.theme.buttonType1Text
 import com.example.professionals.ui.theme.miniTextButton
+import androidx.compose.runtime.rememberCoroutineScope
 
 @Composable
 fun SingIn(navController: NavController){
-
-    val context = LocalContext.current
 
     ButtonBack(61,navController,"RegAcc")
 
@@ -69,11 +71,8 @@ fun SingIn(navController: NavController){
 
                 Text(" Создать", style = RegularTextTypeONB, color = colorResource(R.color.text), modifier = Modifier.clickable { navController.navigate("RegAcc") })
             }
-
         }
-
     }
-
 }
 
 @Composable
@@ -81,7 +80,14 @@ fun ButtonSingIn(email: MutableState<String>, password: MutableState<String>, na
 
     val result = viewModel.resultState.collectAsState()
 
-    Button(onClick = { viewModel.signIn(email.value, password.value)},
+    var errorEmail = remember { mutableStateOf(false) }
+    var isNullField = remember { mutableStateOf(false) }
+
+    Button(onClick = {
+        var check = checkInSingIn(email.value, password.value)
+        if (check == 0) viewModel.signIn(email.value, password.value)
+        else if (check == 1) errorEmail.value = true
+        else isNullField.value = true },
         modifier = Modifier
             .padding(top = 24.dp)
             .height(50.dp)
@@ -127,4 +133,30 @@ fun ButtonSingIn(email: MutableState<String>, password: MutableState<String>, na
             context.startActivity(intent)
         }
     }
+
+//    if (errorEmail.value){
+//
+//        ErrorValidate(errorText = "Введите корректный Email")
+//
+//        errorEmail.value = false
+//    }
+//    if (isNullField.value){
+//
+//        ErrorValidate(errorText = "Заполните все поля!")
+//
+//        isNullField.value = false
+//    }
+}
+
+
+fun checkInSingIn(email: String, password:String): Int{
+
+    if (email.isNotEmpty() and password.isNotEmpty()) {
+        if (validateEmail(email)) {
+            return 0
+        }
+        else return 1
+    }
+
+    return 2
 }

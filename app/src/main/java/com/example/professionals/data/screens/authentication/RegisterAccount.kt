@@ -55,7 +55,6 @@ import com.example.professionals.data.state.ResultState
 @Composable
 fun RegisterAccount(navController: NavController, viewModel: CodeAunth = viewModel() ){
 
-
     val context = LocalContext.current
     var check: Boolean by remember { mutableStateOf(false) }
 

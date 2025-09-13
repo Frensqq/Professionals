@@ -64,8 +64,6 @@ fun ButtonForgot(email: MutableState<String>, navController: NavController, view
 
     val result = viewModel.resultStateEmail.collectAsState()
 
-
-
     Button(onClick = { viewModel.sendOtp(email.value)},
         modifier = Modifier
             .padding(top = 40.dp)
