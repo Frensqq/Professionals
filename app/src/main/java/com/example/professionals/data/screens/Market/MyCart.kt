@@ -547,7 +547,6 @@ fun OutputRowCart(incart:String, Array:Array<String>, id: String, inCart:Array<S
                 )
             }
 
-
             Column(modifier = Modifier.padding(start = 30.dp)) {
 
                 Text(Array[1], style = Cart)
@@ -555,9 +554,7 @@ fun OutputRowCart(incart:String, Array:Array<String>, id: String, inCart:Array<S
 
             }
         }
-
     }
-
 
     Box(
         modifier = Modifier

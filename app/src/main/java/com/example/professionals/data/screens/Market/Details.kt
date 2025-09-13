@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -56,6 +58,7 @@ import com.example.professionals.data.screens.authentication.ButtonBack
 import com.example.professionals.ui.theme.RaleWayFamily
 import com.example.professionals.ui.theme.RegularTextTypeONB
 import com.example.professionals.ui.theme.TitleTypeMarket
+import com.example.professionals.ui.theme.buttonType1Text
 import com.example.professionals.ui.theme.infoDetails
 
 
@@ -126,7 +129,17 @@ fun Details(idSneakers:String, name:String, cost:String, gender:String, info:Str
 
             imageoutput(collectionId, idSneakers, token)
 
-            Text(info, style = infoDetails,  modifier = Modifier.padding(top=33.dp), color = colorResource(R.color.hint))
+            var MaxLines = remember { mutableStateOf(3) }
+
+            Text(info, style = infoDetails,  modifier = Modifier.padding(top=33.dp), maxLines = MaxLines.value, color = colorResource(R.color.hint), overflow = TextOverflow.Ellipsis)
+
+            Row(modifier = Modifier.padding(top = 10.dp).fillMaxWidth()) {
+                 Text("Подробнее", modifier = Modifier.fillMaxWidth().clickable(onClick = {
+                     if (MaxLines.value < 10) MaxLines.value = 15
+                     else MaxLines.value = 1
+                 }), style = buttonType1Text, color = colorResource(R.color.accent), textAlign = TextAlign.End)
+
+            }
 
             Box(modifier =Modifier.padding(bottom = 40.dp).fillMaxSize(), contentAlignment = Alignment.BottomCenter ) {
 
@@ -143,7 +156,7 @@ fun Details(idSneakers:String, name:String, cost:String, gender:String, info:Str
                                     150
                                 )
                                 loveHeart = true
-                                navController.navigate("mycart")
+                                //navController.navigate("mycart")
 
                             } else {
                                 viewModel.delFavorites(favorites, token)
@@ -165,11 +178,8 @@ fun Details(idSneakers:String, name:String, cost:String, gender:String, info:Str
                         )
                     }
 
-
-
                     Button(
                         onClick = {
-
                             if (!(thisInCart)) {
                                 viewModelcart.addtocart(id, idSneakers, token)
                                 viewModelcart.viewCart(
@@ -179,6 +189,7 @@ fun Details(idSneakers:String, name:String, cost:String, gender:String, info:Str
                                     150
                                 )
                                 thisInCart = true
+                                navController.navigate("mycart")
 
                             } else {
                                 thisInCart = false
