@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Professionals</string>
+    <string name="title_activity_main_on_boards">MainActivityOnBoards</string>
+    <string name="title_activity_main_authentication">MainAuthentication</string>
+    <string name="title_activity_main_market">MainMarket</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_map_test">MapTest</string>
+</resources>

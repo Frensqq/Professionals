@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Professionals" parent="android:Theme.Material.Light.NoActionBar">
+
+        <item name="android:windowBackground">@color/whiteBack</item>
+
+    </style>
+
+
+    <style name="Gradient" parent="android:Theme.Material.Light.NoActionBar">
+
+        <item name="android:windowBackground">@drawable/gradient</item>
+
+    </style>
+
+    <style name="Splash" parent="android:Theme.Material.Light.NoActionBar">
+
+        <item name="android:windowBackground">@color/accent</item>
+
+    </style>
+
+</resources>
