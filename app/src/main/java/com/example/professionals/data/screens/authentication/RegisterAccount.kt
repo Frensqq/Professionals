@@ -117,20 +117,20 @@ fun RegisterAccount(navController: NavController, viewModel: CodeAunth = viewMod
 
         val password = passwordFieldAunth("xxxxxxxx")
 
-        Row(modifier = Modifier.padding(top = 12.dp)) {
+        Row(modifier = Modifier.padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
 
 
             Box(modifier = Modifier
                 .padding(end = 12.dp)
-                .width(22.dp)
-                .height(38.dp), contentAlignment = Alignment.Center){
+                .width(22.dp).height(22.dp).clip(RoundedCornerShape(6.dp))
+                .height(38.dp).background(if (check) colorResource(R.color.accent) else colorResource(R.color.background)), contentAlignment = Alignment.Center){
                 IconButton(onClick = { check = !check })
                 {
                     Icon(
-                        ImageBitmap.imageResource(R.drawable.shiel),
+                        ImageBitmap.imageResource(R.drawable.shield),
                         contentDescription = "Подтверждение персональных данных",
                         modifier = Modifier.fillMaxSize(0.5f),
-                        tint = if (check) colorResource(R.color.accent) else colorResource(R.color.text)
+                        tint = colorResource(R.color.text)
                     )
                 }
             }

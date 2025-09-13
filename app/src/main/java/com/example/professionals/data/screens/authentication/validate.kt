@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -34,16 +33,16 @@ fun ErrorValidate(errorText:String){
             confirmButton = {
                 Button(
                     { openDialog.value = false },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Blue, contentColor = Color.White),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Blue),
                     border = BorderStroke(1.dp, Color.LightGray)
                 ) {
                     Text("Ок", fontSize = 22.sp)
                 }
             },
-            containerColor = Color.DarkGray,
-            titleContentColor = Color.LightGray,
-            textContentColor = Color.LightGray,
-            iconContentColor = Color.LightGray
+            containerColor = Color.Blue,
+            titleContentColor = Color.White,
+            textContentColor = Color.White,
+            iconContentColor = Color.White
         )
 
 }
