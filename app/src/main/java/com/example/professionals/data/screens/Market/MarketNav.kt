@@ -41,7 +41,7 @@ fun MarketNavigation(token:String, id:String) {
         composable("profile") { Profile(id, token,navController) }
         //composable("Map") { WorkingMapScreen( ) }
         composable("history") { historyOrders(id, token,navController) }
-        composable("barcode") { BarcodeFullScreen(id) }
+        composable("barcode") { BarcodeFullScreen(id, navController) }
 
     }
 }
