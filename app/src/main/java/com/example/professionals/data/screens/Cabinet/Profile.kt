@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -54,11 +55,11 @@ import com.example.professionals.data.viewModels.viewMarket
 import com.example.professionals.ui.theme.TitleTypeMarket
 import com.example.professionals.ui.theme.UserName
 import com.example.professionals.ui.theme.buttonType1Text
+import com.simonsickle.compose.barcodes.Barcode
+import com.simonsickle.compose.barcodes.BarcodeType
 
 @Composable
 fun Profile(id: String, token: String, navController: NavController, viewModel: viewMarket = viewModel()){
-
-
 
     var isInitialized by remember { mutableStateOf(false) }
 
@@ -68,8 +69,6 @@ fun Profile(id: String, token: String, navController: NavController, viewModel: 
             isInitialized = true
         }
     }
-
-
 
     val userData by viewModel.userData.collectAsState()
 
@@ -232,6 +231,34 @@ fun Profile(id: String, token: String, navController: NavController, viewModel: 
                     )
 
 
+
+
+                            if (BarcodeType.CODE_128.isValueValid(id)) {
+                                Column(
+                                    Modifier.padding(top = 35.dp).height(65.dp).fillMaxWidth()
+                                        .clickable {
+                                            navController.navigate("barcode")
+                                        },
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Row(modifier = Modifier.clip(RoundedCornerShape(16.dp)).background(colorResource(R.color.background)), verticalAlignment = Alignment.Bottom) {
+
+                                        Text("открыть", modifier = Modifier.padding(start=10.dp).height(65.dp).rotate(-90f), textAlign = TextAlign.Center )
+
+                                        Barcode(
+                                            modifier = Modifier.fillMaxSize(),
+                                            resolutionFactor = 2,
+                                            width = 330.dp,
+                                            height = 50.dp,
+                                            type = BarcodeType.CODE_128,
+                                            value = id
+                                        )
+                                    }
+                                }
+                            }
+
+
                     names = RowInProfile("Имя", userList[1] ?: "Введите имя", check)
 
                     surnames = RowInProfile("Фамилия", userList[6] ?: "Введите фамилию", check)
@@ -332,8 +359,6 @@ fun Profile(id: String, token: String, navController: NavController, viewModel: 
                         tint = colorResource(R.color.accent)
                     )
                 }
-
-
 
             }
         }

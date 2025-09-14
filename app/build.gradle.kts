@@ -72,6 +72,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.composed.barcodes)
+
 
     //implementation("com.yandex.android:maps.mobile:4.19.0-lite")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0") // Подключаем саму библиотеку Retrofit

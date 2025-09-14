@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.professionals.data.screens.Cabinet.BarcodeFullScreen
 import com.example.professionals.data.screens.Cabinet.Profile
 import com.example.professionals.data.screens.Cabinet.SideMenu
 import com.example.professionals.data.screens.Cabinet.historyOrders
@@ -40,6 +41,7 @@ fun MarketNavigation(token:String, id:String) {
         composable("profile") { Profile(id, token,navController) }
         //composable("Map") { WorkingMapScreen( ) }
         composable("history") { historyOrders(id, token,navController) }
+        composable("barcode") { BarcodeFullScreen(id) }
 
     }
 }
